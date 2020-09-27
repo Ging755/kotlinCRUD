@@ -3,8 +3,9 @@ package com.example.kotlincrud.data.dal
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.kotlincrud.data.model.Make
+import javax.inject.Inject
 
-class FakeDAL {
+class FakeDAL @Inject constructor() {
     private val makeList = mutableListOf<Make>();
     private val makes = MutableLiveData<List<Make>>();
 
