@@ -1,15 +1,14 @@
 package com.example.kotlincrud.util
 
 import android.app.Application
-import com.example.kotlincrud.data.repository.MakeRepository
+import com.example.kotlincrud.ui.main.MainActivity
 import dagger.Component
 import javax.inject.Singleton
 
 @Singleton
 @Component
 interface ApplicationComponent  {
-
-    fun makeRepository() : MakeRepository;
+    fun inject(activity: MainActivity)
 }
 
 class MyApplication: Application() {
