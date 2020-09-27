@@ -17,6 +17,7 @@ class MainActivity : AppCompatActivity() {
         (applicationContext as MyApplication).appComponent.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main);
+        initUI();
     }
 
     private fun initUI() {
@@ -30,7 +31,7 @@ class MainActivity : AppCompatActivity() {
         })
 
         button_add_make.setOnClickListener{
-            val make = Make(editText_make.toString());
+            val make = Make(editText_make.text.toString());
 
             makeViewModel.addMake(make);
             editText_make.setText("");
