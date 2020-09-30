@@ -1,40 +1,28 @@
 package com.example.kotlincrud.ui.main
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.lifecycle.Observer
+import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
 import com.example.kotlincrud.R
-import com.example.kotlincrud.data.model.Make
-import com.example.kotlincrud.util.MyApplication
-import kotlinx.android.synthetic.main.activity_main.*
-import java.lang.StringBuilder
-import javax.inject.Inject
+import com.google.android.material.bottomnavigation.BottomNavigationView
+
 
 class MainActivity : AppCompatActivity() {
-    @Inject lateinit var makeViewModel: MakeViewModel;
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        (applicationContext as MyApplication).appComponent.inject(this)
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main);
-        initUI();
-    }
+        setContentView(R.layout.activity_main)
+        val navView: BottomNavigationView = findViewById(R.id.bottom_nav);
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        val navController = navHostFragment.navController
 
-    private fun initUI() {
-        makeViewModel.getMakes().observe(this, Observer { makes ->
-            val stringBuilder = StringBuilder();
-            makes.forEach{
-                    make -> stringBuilder.append("${make.name}\n\n");
-            }
+        val appBarConfiguration = AppBarConfiguration(setOf(
+            R.id.navigation_makes, R.id.navigation_models))
 
-            textView_makes.text = stringBuilder.toString();
-        })
-
-        button_add_make.setOnClickListener{
-            val make = Make(editText_make.text.toString());
-
-            makeViewModel.addMake(make);
-            editText_make.setText("");
-        }
+        setupActionBarWithNavController(navController, appBarConfiguration)
+        navView.setupWithNavController(navController)
     }
 }

@@ -1,4 +1,4 @@
-package com.example.kotlincrud.ui.main
+package com.example.kotlincrud.ui.make
 
 import androidx.lifecycle.ViewModel
 import com.example.kotlincrud.data.model.Make
